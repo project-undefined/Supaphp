@@ -68,14 +68,23 @@ class SupaObject : public Php::Base {
                     Php::echo("[Supaphp/Err]: Conditional is invalid.");
                     return ; 
                 }
-            )
+            );
 
-            
+            return self; 
         }
 
         
+        // execute the query
+        Php::Value get()  {
+            Php::Value self(this);
+            cpr::Response res = cpr::Get(
+                cpr::Url{self.get("query_url").stringValue()+self.get("query").stringValue()},
+                cpr::Header{{"apikey", self.get("api_key").stringValue()}},
+                cpr::Bearer{self.get("api_key").stringValue()}
+            );
+            
 
-        Php::Value get
+        }
 }
 
 
