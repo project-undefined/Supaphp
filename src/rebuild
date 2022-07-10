@@ -1,0 +1,4 @@
+rm supabase.o && rm supaphp.so && rm ./out/supabase.o && rm ./out/supaphp.so
+make
+sudo make install
+mv supabase.o ./out/ && mv supaphp.so ./out/
