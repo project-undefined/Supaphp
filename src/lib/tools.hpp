@@ -21,7 +21,20 @@ namespace tools {
 
         for (int x=0;x<len;x++) {
             string v = val[x].stringValue();
-            if (val[x].isString()) v='"'+v+'"';
+            if (val[x].isString()) {
+                v = regex_replace(v, regex("\""), "\\\"");
+                v='"'+v+'"';
+            }
+            if (val[x].isNull()) v="null";
+            if (val[x].isBool()) {
+                if (val[x].boolValue() == true) {
+                            v = "true";
+                }
+                else if (val[x].boolValue()==false) {
+                            v = "false";
+                }
+                
+            }
             if (sthelp=="{") sthelp+=v;
             else sthelp+=','+v;
         };
